@@ -1,0 +1,20 @@
+newsletter_user
+	> id
+	> email
+
+episode
+	> id
+	> country
+	> number
+	> title
+	> map
+	> date
+	> main_photo
+	> short_text
+	> text
+	> video
+
+country
+	> id
+	> photo
+	> title

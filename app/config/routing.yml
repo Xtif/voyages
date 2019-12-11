@@ -1,0 +1,111 @@
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+
+homepage:
+    path: /
+    defaults:
+      _controller: "AppBundle:Homepage:index"
+
+wo_we_are:
+    path: /wo_we_are
+    defaults:
+      _controller: "AppBundle:Homepage:woweare"
+
+########## COUNTRY ##########
+country_create:
+    path: /country_create
+    defaults:
+      _controller: "AppBundle:Country:createCountry"
+
+country_read:
+    path: /country/{country_id}
+    defaults:
+      _controller: "AppBundle:Country:readCountry"
+
+country_update:
+    path: /country_update/{country_id}
+    defaults:
+      _controller: "AppBundle:Country:updateCountry"
+
+country_delete:
+    path: /country_delete/{country_id}
+    defaults:
+      _controller: "AppBundle:Country:deleteCountry"
+
+country_list:
+    path: /country_list
+    defaults:
+      _controller: "AppBundle:Country:listCountry"
+
+########## EPISODE ##########
+episode_initialize:
+    path: /episode_initialize
+    defaults:
+      _controller: "AppBundle:Episode:initializeEpisode"
+
+episode_read:
+    path: /{country_folder}/episode_{episode_id}
+    defaults:
+      _controller: "AppBundle:Episode:readEpisode"
+
+episode_update:
+    path: /episode_update/{episode_id}
+    defaults:
+      _controller: "AppBundle:Episode:updateEpisode"
+
+episode_delete:
+    path: /episode_delete/{episode_id}
+    defaults:
+      _controller: "AppBundle:Episode:deleteEpisode"
+
+episode_publish:
+    path: /episode_publish/{episode_id}
+    defaults:
+      _controller: "AppBundle:Episode:publishEpisode"
+
+episode_list:
+    path: /episode_list
+    defaults:
+      _controller: "AppBundle:Episode:listEpisode"
+
+image_upload:
+    path: /image_upload
+    defaults:
+      _controller: "AppBundle:Episode:imageUpload"
+
+########## SUBSCRIBER ##########
+newsletter_subscritpion:
+    path: /subscription/{email}
+    defaults:
+      _controller: "AppBundle:Newsletter:subscription"
+
+view_all_subscriber:
+    path: /all_subscriber
+    defaults:
+      _controller: "AppBundle:Newsletter:allSubscriber"
+
+delete_subscriber:
+    path: /delete_subscriber/{subscriber_id}
+    defaults:
+      _controller: "AppBundle:Newsletter:deleteSubscriber"
+
+########## USERS (FOS) ##########
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /inscription
+
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /motdepasseperdu
+
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+
+access_denied:
+    path: "/acces_refuse"
+    defaults:
+      _controller: "AppBundle:Error:accessDenied"

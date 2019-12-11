@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block title %}Liste des épisode{% endblock %}
+
+{% block body %}
+	
+    {{ parent() }}
+
+    <div class="empty-div-small mb-3">
+    </div>
+
+    <div class="col-lg-11 m-auto">
+        <h1 class="main-title mt-2">LISTE DES EPISODES</h1>
+    </div>
+
+    <div class="col-lg-11 m-auto">
+		<table class="table">
+			<thead class="thead-light">
+				<tr>
+					<th scope="col">Pays</th>
+					<th scope="col">Numéro</th>
+					<th scope="col">Titre</th>
+					<th scope="col">Date</th>
+					<th scope="col">Photo</th>
+					<th scope="col">Gestion</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for episode in allEpisode %}
+					<tr>
+					  	<th scope="row">{{ episode.country.title }}</th>
+					  	<td>{{ episode.number }}</td>
+					  	<td>{{ episode.title }}</td>
+					  	<td>{{ episode.dateFrom|date("d/m/Y") }} - {{ episode.dateTo|date("d/m/Y") }}</td>
+					  	<td>
+					  		<img class="img-thumbnail" src="{{ asset('uploads/' ~ episode.country.folder ~ '/' ~ episode.number ~ '/' ~ episode.mainPhoto ~ '') }}" alt="{{ episode.mainPhoto }}">
+						</td>
+					  	<td>
+					  		<p>
+					  			<a href="{{ path('episode_update', { 'episode_id': episode.id }) }}">Modifier l'épisode</a><br/>
+					  			{#<a href="{{ path('episode_delete', { 'episode_id': episode.id }) }}">Supprimer l'épisode</a>#}
+					  		</p>
+					  	</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	  
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+
+

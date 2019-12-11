@@ -1,0 +1,401 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * episode
+ *
+ * @ORM\Table(name="episode")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\episodeRepository")
+ */
+class episode
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\country", inversedBy="episodes")
+     * @ORM\JoinColumn(nullable=false)
+     *
+     */
+    private $country;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="number", type="integer")
+     */
+    private $number;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=255, unique=true)
+     */
+    private $title;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="map", type="string", length=255, nullable=true)
+     */
+    private $map;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateFrom", type="date", nullable=true)
+     */
+    private $dateFrom;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateTo", type="date", nullable=true)
+     */
+    private $dateTo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="main_photo", type="string", length=255)
+     */
+    private $mainPhoto;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="short_text", type="text")
+     */
+    private $shortText;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="text", type="text", nullable=true)
+     */
+    private $text;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="video", type="string", length=255, nullable=true)
+     */
+    private $video;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="state", type="string", length=255, nullable=true)
+     */
+    private $state;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set country
+     *
+     * @param string $country
+     *
+     * @return episode
+     */
+    public function setCountry($country)
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * Get country
+     *
+     * @return string
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    /**
+     * Set number
+     *
+     * @param integer $number
+     *
+     * @return episode
+     */
+    public function setNumber($number)
+    {
+        $this->number = $number;
+
+        return $this;
+    }
+
+    /**
+     * Get number
+     *
+     * @return int
+     */
+    public function getNumber()
+    {
+        return $this->number;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     *
+     * @return episode
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set map
+     *
+     * @param string $map
+     *
+     * @return episode
+     */
+    public function setMap($map)
+    {
+        $this->map = $map;
+
+        return $this;
+    }
+
+    /**
+     * Get map
+     *
+     * @return string
+     */
+    public function getMap()
+    {
+        return $this->map;
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     *
+     * @return episode
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Set mainPhoto
+     *
+     * @param string $mainPhoto
+     *
+     * @return episode
+     */
+    public function setMainPhoto($mainPhoto)
+    {
+        $this->mainPhoto = $mainPhoto;
+
+        return $this;
+    }
+
+    /**
+     * Get mainPhoto
+     *
+     * @return string
+     */
+    public function getMainPhoto()
+    {
+        return $this->mainPhoto;
+    }
+
+    /**
+     * Set shortText
+     *
+     * @param string $shortText
+     *
+     * @return episode
+     */
+    public function setShortText($shortText)
+    {
+        $this->shortText = $shortText;
+
+        return $this;
+    }
+
+    /**
+     * Get shortText
+     *
+     * @return string
+     */
+    public function getShortText()
+    {
+        return $this->shortText;
+    }
+
+    /**
+     * Set text
+     *
+     * @param string $text
+     *
+     * @return episode
+     */
+    public function setText($text)
+    {
+        $this->text = $text;
+
+        return $this;
+    }
+
+    /**
+     * Get text
+     *
+     * @return string
+     */
+    public function getText()
+    {
+        return $this->text;
+    }
+
+    /**
+     * Set video
+     *
+     * @param string $video
+     *
+     * @return episode
+     */
+    public function setVideo($video)
+    {
+        $this->video = $video;
+
+        return $this;
+    }
+
+    /**
+     * Get video
+     *
+     * @return string
+     */
+    public function getVideo()
+    {
+        return $this->video;
+    }
+
+    /**
+     * Set state
+     *
+     * @param string $state
+     *
+     * @return state
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
+
+        return $this;
+    }
+
+    /**
+     * Get state
+     *
+     * @return string
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    /**
+     * Set dateFrom
+     *
+     * @param \DateTime $dateFrom
+     *
+     * @return episode
+     */
+    public function setDateFrom($dateFrom)
+    {
+        $this->dateFrom = $dateFrom;
+
+        return $this;
+    }
+
+    /**
+     * Get dateFrom
+     *
+     * @return \DateTime
+     */
+    public function getDateFrom()
+    {
+        return $this->dateFrom;
+    }
+
+    /**
+     * Set dateTo
+     *
+     * @param \DateTime $dateTo
+     *
+     * @return episode
+     */
+    public function setDateTo($dateTo)
+    {
+        $this->dateTo = $dateTo;
+
+        return $this;
+    }
+
+    /**
+     * Get dateTo
+     *
+     * @return \DateTime
+     */
+    public function getDateTo()
+    {
+        return $this->dateTo;
+    }
+}

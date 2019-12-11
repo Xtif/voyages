@@ -1,0 +1,6 @@
+    $debug = fopen('debug.txt', 'a');
+    fwrite($debug, var_export($this->countryService, true));
+    fclose($debug);
+    die();
+
+

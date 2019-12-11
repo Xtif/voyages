@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block title %}Créer un nouvel episode{% endblock %}
+
+{% block body %}
+
+    {{ parent() }}
+
+    <div class="empty-div-small mb-3">
+    </div>
+
+    <div class="col-lg-11 m-auto">
+        <h1 class="main-title mt-2">AJOUTER UN NOUVEL EPISODE</h1>
+
+        <div class="col-lg-11 m-auto">
+
+            {{ form_start(form) }}      
+
+            <div class="form-group">
+                {{ form_row(form.title) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_row(form.number) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_row(form.dateFrom) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_row(form.dateTo) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_row(form.country) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_row(form.mainPhoto) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_row(form.video) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_row(form.map) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_row(form.shortText) }}
+            </div>
+
+            <div class="form-group col-lg-4 m-auto">
+                {{ form_row(form.submit) }}
+            </div>
+
+            {{ form_rest(form) }}
+
+            {{ form_end(form) }}
+
+        </div>
+
+    </div>
+
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+

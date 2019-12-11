@@ -1,0 +1,24 @@
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block title %}Mot de passe perdu{% endblock %}
+
+{% block fos_user_content %}
+
+	<div class="col-lg-8 m-auto">
+		<h1 class="main-title mt-2">MOT DE PASSE PERDU</h1>
+	</div>
+
+	<div class="col-lg-7 m-auto">
+  	<p>
+			Votre demande à bien été prise en compte, vous allez recevoir un mail à l'adresse mail associé à votre compte pour réinitialiser votre mot de passe.
+		</p>
+
+		<p class="text-center">
+			Suivez ce lien pour <a href="{{ path('fos_user_security_login') }}">vous connectez</a> !
+		</p>
+
+	</div>
+
+{% endblock fos_user_content %}

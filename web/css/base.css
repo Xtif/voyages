@@ -1,0 +1,189 @@
+/**********FONT**********/
+@font-face {
+    font-family: 'Agenda-Bold';
+    src: url('../Font/Agenda/AgendaBold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Agenda-Medium';
+    src: url('../Font/Agenda/AgendaMedium.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Agenda-Light';
+    src: url('../Font/Agenda/AgendaLight.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/**********BASE**********/
+html {
+    height: 100%;
+    width: 100%;
+    font-family: 'Agenda-Light', 'Palatino Linotype', Arial, sans-serif;
+}
+
+.no-padding {
+    padding: 0px;
+    margin: 0px;
+}
+
+.img-thumbnail {
+    width: 150px;
+}
+
+.empty-div-small {
+    width: 100%;
+    height: 60px;
+    min-height: 60px;
+    z-index: -2;
+}
+
+
+/**********BASE MENU**********/
+nav {
+    background-color: white;
+    opacity: 0.7;
+    z-index: 5;
+    transition: all 0.5s ease-in-out;
+}
+
+.nav-link {
+    color: #303030 !important;
+    font-size: 0.8em;
+}
+
+nav:hover {
+    opacity: 1;
+    transition: all 0.5s ease-in-out;
+}
+
+.site-title {
+    font-family: 'Agenda-Light';
+    font-size: 1.2em;
+    line-height: 1em;
+}
+
+.logo-title {
+    line-height: 0.8em;
+    color: #303030 !important;
+}
+
+.logo-site {
+    width: 50px;
+    height: 50px;
+}
+
+.subtitle {
+    font-size: 0.6em;
+    line-height: 1em;
+    color: #303030 !important;
+}
+
+/*****CAROUSSEL*****/
+.carousel-caption {
+    background-color: white;
+    opacity: 0.7;
+    left: 5%;
+    bottom: 30px;
+    text-align: left;
+    color: #303030;
+    width: 40%;
+    max-width: 90%;
+}
+
+.carousel-caption:hover {
+    opacity: 1;
+    transition: all 0.5s ease-in-out;
+}
+
+.carousel {
+    width: 100%;
+    position: absolute;
+    top: 0;
+}
+
+.carousel-inner {
+    max-height: 100%;
+}
+
+.carousel-item {
+    height: 50vh;
+    min-height: 300px;
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.title-caroussel-caption {
+    font-family: 'Agenda-Bold';
+}
+
+.text-caroussel-caption {
+    font-family: 'Agenda-Medium';
+}
+
+.empty-div {
+    width: 100%;
+    height: 50vh;
+    min-height: 300px;
+    z-index: -2;
+}
+
+
+/**********CARDS**********/
+.card {
+    width: 19%;
+}
+
+
+/*********CAPTION*********/
+.caption {
+    background-color: white;
+    border-radius: 5px;
+    opacity: 0.5;
+    text-align: left;
+    color: #303030;
+    max-width: 90%;
+}
+
+.caption:hover {
+    opacity: 1;
+    transition: all 0.5s ease-in-out;
+}
+
+.caption-middle {
+    color: #303030 !important;
+    font-size: 1em;
+    font-family: 'Agenda-Light', 'Palatino Linotype', Arial, sans-serif !important;
+}
+
+.caption-strong {
+    color: #303030 !important;
+    font-size: 1em;
+    font-family: 'Agenda-Medium', 'Palatino Linotype', Arial, sans-serif !important;
+}
+
+.caption-light {
+    color: #303030 !important;
+    margin-top: 10px;
+    font-size: 0.6em;
+    font-family: 'Agenda-Light', 'Palatino Linotype', Arial, sans-serif;
+}
+
+/**********MEDIA QUERIES**********/
+
+@media screen and (max-width: 992px) {
+}
+
+@media screen and (max-width: 600px) {
+}
+
+
+

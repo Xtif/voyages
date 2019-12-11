@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/country_list.css') }}" />
+{% endblock %}
+
+{% block title %}Liste des pays{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+
+    <div class="empty-div-small mb-3">
+    </div>
+
+    <div class="col-lg-11 m-auto">
+        <h1 class="main-title mt-2">LISTE DES PAYS</h1>
+    </div>
+
+    <div class="col-lg-11 m-auto">
+		<table class="table">
+			<thead class="thead-light">
+				<tr>
+					<th scope="col">Pays</th>
+					<th scope="col">Date</th>
+					<th scope="col">Photo</th>
+					<th scope="col">Gestion</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for country in allCountry %}
+					<tr>
+					  	<th scope="row">{{ country.title }}</th>
+					  	<td>{{ country.date }}</td>
+					  	<td>
+					  		<img class="img-thumbnail" src="{{ asset('uploads/' ~ country.folder ~ '/' ~ country.photo ~ '') }}" alt="{{ country.photo }}">
+						</td>
+					  	<td>
+					  		<p>
+					  			<a href="{{ path('country_update', { 'country_id': country.id }) }}">Modifier le pays</a><br/>
+					  			<a href="{{ path('country_delete', { 'country_id': country.id }) }}">Supprimer le pays</a>
+					  		</p>
+					  	</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	  
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+
+

@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block title %}Voyages{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+
+    <div id="carousel" class="carousel slide mb-3" data-ride="carousel">
+        <div class="carousel-inner">
+
+            {% set i=0 %}
+            {% for episode in lastEpisodes %}
+                <div class="carousel-item {% if i==0 %}active{% endif %}" style="background-image: url('{{ asset('uploads/' ~ episode.country.folder ~ '/' ~ episode.number ~ '/' ~ episode.mainPhoto ~ '') }}')">
+                    <div class="carousel-caption d-none d-md-block col-lg-5 p-3">
+                        <h5 class="title-caroussel-caption">{{ episode.country.title }} - Episode {{ episode.number }}</h5>
+                        <p class="text-caroussel-caption mb-0">
+                          {{ episode.shortText|truncate(100, true, '') }}...<a href="{{ path('episode_read', { 'country_folder': episode.country.folder, 'episode_id': episode.id }) }}" class="clickable-link">En savoir plus</a>.
+                        </p>
+                    </div>
+                </div>
+                {% set i=1 %}
+            {% endfor %}
+
+            <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+
+            <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+
+        </div>
+    </div> <!--End carousel -->
+
+    <div class="empty-div mb-3">
+    </div>
+
+    <div class="col-lg-11 m-auto">
+      <h1 class="main-title mt-2">ABONNEZ-VOUS !</h1>
+      <div class="col-lg-11 m-auto">
+        <p>
+          Abonnez-vous pour être alerté par mail dès que nous publions un nouvel épisode ! Vous recevrez un mail contenant le résumé de l'épisode. Ainsi, vous ne manquerez rien de nos aventures :) Le site ne permet pas de poster des commentaires, donc si vous avez quelque chose (de gentil) à nous dire, n'hésitez pas à nous contacter aux adresses suivantes : <a href="mailto:schembri.aurelie@gmail.com">schembri.aurelie@gmail.com</a> ou <a href="mailto:thibault.fiacre@gmail.com">thibault.fiacre@gmail.com</a>. Nous serons ravis d'avoir de vos nouvelles !
+        </p>
+      </div>
+
+    <div class="col-lg-6 m-auto">
+        {{ form_start(form) }}
+
+        <div class="row">
+          {{ form_label(form.email) }}
+          {{ form_widget(form.email) }}
+          {{ form_widget(form.submit) }}
+        </div>
+
+        {{ form_rest(form) }}
+
+        {{ form_end(form) }}
+    </div>
+
+    <hr class="mt-5">
+
+    <h1 class="main-title mt-3">LISTE DES PAYS</h1>
+        
+    <div class="d-flex justify-content-around">
+        {% for country in allCountry %}
+            <div class="card text-center">
+                <img class="card-img-top" src="{{ asset('uploads/' ~ country.folder ~ '/' ~ country.photo ~ '') }}" alt="{{ country.photo }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ country.title }}</h5>
+                    <p class="card-text">{{ country.date }}</p>
+                    <a href="{{ path('country_read', { 'country_id': country.id }) }}" class="btn btn-info">Voir les épisodes</a>
+                    {% if app.user %}
+                        {% if "ROLE_ADMIN" in app.user.roles %}
+                            <a href="{{ path('country_update', { 'country_id': country.id }) }}" class="btn btn-info mt-2">Modifier le pays</a>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+

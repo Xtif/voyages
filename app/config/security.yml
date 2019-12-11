@@ -1,0 +1,50 @@
+# To get started with security, check out the documentation:
+# https://symfony.com/doc/current/security.html
+security:
+
+    encoders:
+        FOS\UserBundle\Model\UserInterface: bcrypt
+
+    role_hierarchy:
+        ROLE_VISITEUR:  [ROLE_USER]
+        ROLE_ADMIN:     [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username
+
+    firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            pattern: ^/
+            form_login:
+                provider: fos_userbundle
+                csrf_token_generator: security.csrf.token_manager
+                # if you are using Symfony < 2.8, use the following config instead:
+                # csrf_provider: form.csrf_provider
+
+            logout:       true
+            anonymous:    true
+
+    access_control:
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/all_subscriber, role: ROLE_ADMIN }
+        - { path: ^/delete_subscriber/, role: ROLE_ADMIN }
+        - { path: ^/episode_create, role: ROLE_ADMIN }
+        - { path: ^/episode_publish, role: ROLE_ADMIN }
+        - { path: ^/episode_update/, role: ROLE_ADMIN }
+        - { path: ^/episode_delete/, role: ROLE_ADMIN }
+        - { path: ^/episode_list, role: ROLE_ADMIN }
+        - { path: ^/country_create, role: ROLE_ADMIN }
+        - { path: ^/country_update/, role: ROLE_ADMIN }
+        - { path: ^/country_delete/, role: ROLE_ADMIN }
+        - { path: ^/country_list, role: ROLE_ADMIN }
+        - { path: ^/image_upload, role: ROLE_ADMIN }

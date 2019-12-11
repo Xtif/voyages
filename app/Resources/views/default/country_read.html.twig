@@ -1,0 +1,47 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/country_read.css') }}" />
+
+{% endblock %}
+
+{% block title %}{{ country.title }}{% endblock %}
+
+{% block body %}
+	{{ parent() }}
+
+	<div class="col-lg-12 m-0 p-0">
+		<img src="{{ asset('uploads/' ~ country.folder ~ '/' ~ country.photo ~ '') }}" class="photo-country img-responsive" alt="{{ country.photo }}"/>
+		<div class="caption text-center p-3">
+            <h1 class="caption-strong">{{ country.title }}</h1>
+            <h2 class="caption-middle">{{ country.date }}</h2>
+        </div>
+	</div>	
+
+	<div class="mt-1 row justify-content-around">
+        {% for episode in episodes %}
+            <div class="card text-center col-lg-2 col-md-4 col-sm-5 col-xs-6 m-1 p-0 mt-3">
+                <img class="card-img-top" src="{{ asset('uploads/' ~ country.folder ~ '/' ~ episode.number ~ '/' ~ episode.mainPhoto ~ '') }}" alt="{{ episode.mainPhoto }}">
+                <div class="card-body">
+                    <h5>Episode {{ episode.number }}</h5>
+                    <h5 class="card-title">{{ episode.title }}</h5>
+                    <p class="card-text">{{ episode.shortText|truncate(50, true, '') }}...</p>
+                    <a href="{{ path('episode_read', { 'country_folder': country.folder, 'episode_id': episode.id }) }}" class="btn btn-info">En savoir plus</a>
+                    {% if app.user %}
+                        {% if "ROLE_ADMIN" in app.user.roles %}
+                            <a href="{{ path('episode_update', { 'episode_id': episode.id }) }}" class="btn btn-info mt-2">Modifier l'épisode</a>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+		
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+{% endblock %}

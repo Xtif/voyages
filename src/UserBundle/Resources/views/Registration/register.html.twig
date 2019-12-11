@@ -1,0 +1,29 @@
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% block stylesheets %}
+
+    {{ parent() }}
+    <link rel = "stylesheet" href = "{{ asset('CSS/user_bundle.css') }}" />
+
+{% endblock %}
+
+{% block title %}S'inscrire{% endblock %}
+
+{% block fos_user_content %}
+
+	<div class="col-lg-8 m-auto">
+		<h1 class="main-title mt-2">S'INSCRIRE</h1>
+	</div>
+
+	<div class="col-lg-7 m-auto">
+  	{% include "@FOSUser/Registration/register_content.html.twig" %}
+
+		<p class="text-center">
+			Vous avez déjà un compte, <a href="{{ path('fos_user_security_login') }}">connectez-vous</a> !
+		</p>
+	</div>
+
+{% endblock fos_user_content %}
+
+
+
