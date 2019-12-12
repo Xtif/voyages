@@ -45,7 +45,7 @@ episode_initialize:
       _controller: "AppBundle:Episode:initializeEpisode"
 
 episode_read:
-    path: /{country_folder}/episode_{episode_id}
+    path: /country/{country_id}/episode/{episode_id}
     defaults:
       _controller: "AppBundle:Episode:readEpisode"
 

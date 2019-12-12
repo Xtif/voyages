@@ -186,12 +186,12 @@ class EpisodeController extends Controller
     } else { // Si on arrive sur la page pour la première fois
       return $this->render('default/episode_initialize.html.twig', array('form' => $form->createView()));
     }
-  } // End of createEpisode()
+  } // End of initializeEpisode()
 
 
-  public function readEpisodeAction($country_folder, $episode_id) {
+  public function readEpisodeAction($country_id, $episode_id) {
     $episode = $this->episodeService->findOneById($episode_id); 
-    $country = $this->countryService->findOneById($episode->getCountry()->getId());
+    $country = $this->countryService->findOneById($country_id);
     return $this->render('default/episode_read.html.twig', array("country" => $country, "episode" => $episode));
   } // End of readEpisodeAction()
 
