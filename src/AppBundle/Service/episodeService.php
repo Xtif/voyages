@@ -15,6 +15,27 @@ class episodeService
     $this->fileService = $fileService;
 	}
 
+  public function renamePathPicture() {
+    $episodes = $this->findAllEpisode();
+    if ($episodes) {
+      foreach ($episodes as $episode) {
+        if ($episode->getId() > 7) {
+          $oldText = $episode->getText();
+          $dateEpisode = date_format($episode->getDateFrom(),"Y_m_d");
+          $oldPath = $episode->getCountry()->getFolder() . "/" . $dateEpisode . $episode->getCountry()->getFolder() . "/" . $dateEpisode . "/" . $episode->getCountry()->getFolder();
+          $newPath = $episode->getCountry()->getFolder();
+          $newText = str_replace($oldPath, $newPath, $oldText);
+          $episode->setText($newText);
+          $this->em->persist($episode);
+        }
+      }
+      $this->em->flush();
+      return true;
+    } else {
+      return false;
+    }
+  } // End of renamePathPicture()
+
   public function findAllEpisode() 
   {
     $allEpisode = $this->episodeRepository->findAll();
@@ -93,8 +114,7 @@ class episodeService
     } 
   } // End of removeEpisode()
 
-  public function findThreeLastId() 
-  {
+  public function findThreeLastId() {
     $episodes = $this->episodeRepository->findThreeLastId();
     if ($episodes) {
       return $episodes;
@@ -102,6 +122,25 @@ class episodeService
       return false;
     }
   } // End of findThreeLast()
+
+
+//A finir !!!!!!!!!!!!
+//  public function reorderNumber($country) { // Réorganise les numéro d'épisodes en fonction des dates (dateFrom)
+//    $episodes = $this->findAllByCountry($country);
+//    if ($episodes) {
+//      $i = 1;
+//      foreach ($episodes as $episode) {
+//        $dateFrom = $episode->getDateFrom();
+//        $dateFromPrevious = 
+//        if ($episode->ge)
+//          $episode->setNumber($i);
+//        
+//        
+//      }
+//    } else {
+//      return false;
+//    }
+//  }
 
 
 

@@ -74,6 +74,11 @@ image_upload:
     defaults:
       _controller: "AppBundle:Episode:imageUpload"
 
+episode_dev:
+    path: /episode_dev
+    defaults:
+      _controller: "AppBundle:Episode:dev"
+
 ########## SUBSCRIBER ##########
 newsletter_subscritpion:
     path: /subscription/{email}

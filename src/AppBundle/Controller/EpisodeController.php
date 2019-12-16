@@ -44,6 +44,14 @@ class EpisodeController extends Controller
     $this->uploadsDirectory = $uploadsDirectory;
   }
 
+  public function devAction(Request $request) {
+    if ($this->episodeService->renamePathPicture()) {
+      return $this->redirectToRoute('homepage');
+    } else {
+      return false;
+    }
+  }
+
   public function initializeEpisodeAction(Request $request) {
 
     $episode = new Episode();
@@ -62,15 +70,15 @@ class EpisodeController extends Controller
           )
         )
       )
-      ->add('number', IntegerType::class,
-        array(
-          'label' => 'Numéro de l\'épisode',
-          'attr' => array(
-            'class' => 'form-control col-lg-10 m-auto',
-            'placeholder' => 'N°'
-          )
-        )
-      )
+//      ->add('number', IntegerType::class,
+//        array(
+//          'label' => 'Numéro de l\'épisode',
+//          'attr' => array(
+//            'class' => 'form-control col-lg-10 m-auto',
+//            'placeholder' => 'N°'
+//          )
+//        )
+//      )
       ->add('dateFrom', DateType::class,
         array(
           'attr'   => array(
@@ -93,6 +101,9 @@ class EpisodeController extends Controller
         array(
           'class' => 'AppBundle:country',
           'choice_label' => 'title',
+          'query_builder' => function (countryRepository $cr) {
+              return $cr->createQueryBuilder('c')->orderBy('c.title', 'ASC');
+          },
           'label' => 'Pays associé',
           'attr' => array(
             'class' => 'form-control col-lg-10 m-auto',
@@ -218,15 +229,15 @@ class EpisodeController extends Controller
           )
         )
       )
-      ->add('number', IntegerType::class,
-        array(
-          'label' => 'Numéro de l\'épisode',
-          'attr' => array(
-            'class' => 'form-control col-lg-10 m-auto',
-            'placeholder' => 'N°'
-          )
-        )
-      )
+//      ->add('number', IntegerType::class,
+//        array(
+//          'label' => 'Numéro de l\'épisode',
+//          'attr' => array(
+//            'class' => 'form-control col-lg-10 m-auto',
+//            'placeholder' => 'N°'
+//          )
+//        )
+//      )
       ->add('dateFrom', DateType::class,
         array(
           'attr'   => array(
@@ -249,6 +260,9 @@ class EpisodeController extends Controller
         array(
           'class' => 'AppBundle:country',
           'choice_label' => 'title',
+          'query_builder' => function (countryRepository $cr) {
+              return $cr->createQueryBuilder('c')->orderBy('c.title', 'ASC');
+          },
           'label' => 'Pays associé',
           'attr' => array(
             'class' => 'form-control col-lg-10 m-auto',

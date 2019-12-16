@@ -13,7 +13,7 @@
 	{{ parent() }}
 
 	<div class="col-lg-12 m-0 p-0">
-		<img src="{{ asset('uploads/' ~ country.folder ~ '/' ~ episode.number ~ '/' ~ episode.mainPhoto ~ '') }}" class="photo-country img-responsive" alt="{{ episode.mainPhoto }}"/>
+		<img src="{{ asset('uploads/' ~ country.folder ~ '/' ~ episode.dateFrom|date("Y_m_d") ~ '/' ~ episode.mainPhoto ~ '') }}" class="photo-country img-responsive" alt="{{ episode.mainPhoto }}"/>
 		<div class="caption text-center p-3">
             <h1 class="caption-middle text-nowrap">{{ country.title }} - Episode {{ episode.number }}</h1>
             <h2 class="caption-strong text-nowrap">{{ episode.title }}</h2>
@@ -42,7 +42,7 @@
 				<h1 class="col-lg-12 m-auto mb-0">LE RESUME VIDEO</h1>
 				<div class="col-lg-12 m-auto text-center">
 					<video width="560" height="315" controls>
-						<source src="{{ asset('uploads/' ~ country.folder ~ '/' ~ episode.number ~ '/' ~ episode.video ~ '') }}" type="video/mp4">
+						<source src="{{ asset('uploads/' ~ country.folder ~ '/' ~ episode.dateFrom|date("Y_m_d") ~ '/' ~ episode.video ~ '') }}" type="video/mp4">
 						Your browser does not support the video tag.
 					</video>
 				</div>
