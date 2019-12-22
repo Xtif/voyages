@@ -14,7 +14,7 @@
 
             {% set i=0 %}
             {% for episode in lastEpisodes %}
-                <div class="carousel-item {% if i==0 %}active{% endif %}" style="background-image: url('{{ asset('uploads/' ~ episode.country.folder ~ '/' ~ episode.number ~ '/' ~ episode.mainPhoto ~ '') }}')">
+                <div class="carousel-item {% if i==0 %}active{% endif %}" style="background-image: url('{{ asset('uploads/' ~ episode.country.folder ~ '/' ~ episode.dateFrom|date("Y_m_d") ~ '/' ~ episode.mainPhoto ~ '') }}')">
                     <div class="carousel-caption d-none d-md-block col-lg-5 p-3">
                         <h5 class="title-caroussel-caption">{{ episode.country.title }} - Episode {{ episode.number }}</h5>
                         <p class="text-caroussel-caption mb-0">

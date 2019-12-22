@@ -15,6 +15,7 @@ class episodeService
     $this->fileService = $fileService;
 	}
 
+  // Renommage des src des images dans le text des épisodes
   public function renamePathPicture() {
     $episodes = $this->findAllEpisode();
     if ($episodes) {
@@ -64,7 +65,17 @@ class episodeService
     } else {
       return false;
     }
-  } // End of findOneById()  
+  } // End of findAllByCountry()  
+
+  public function findAllByCountryByDate($country) 
+  {
+    $episodes = $this->episodeRepository->getEpisodesByCountryByDate($country);
+    if ($episodes) {
+      return $episodes;
+    } else {
+      return false;
+    }
+  } // End of findAllByCountryByDate()  
 
   public function draftEpisode($id) {
     $episode = $this->findOneById($id);
@@ -124,23 +135,23 @@ class episodeService
   } // End of findThreeLast()
 
 
-//A finir !!!!!!!!!!!!
-//  public function reorderNumber($country) { // Réorganise les numéro d'épisodes en fonction des dates (dateFrom)
-//    $episodes = $this->findAllByCountry($country);
-//    if ($episodes) {
-//      $i = 1;
-//      foreach ($episodes as $episode) {
-//        $dateFrom = $episode->getDateFrom();
-//        $dateFromPrevious = 
-//        if ($episode->ge)
-//          $episode->setNumber($i);
-//        
-//        
-//      }
-//    } else {
-//      return false;
-//    }
-//  }
+  public function reorderNumberEpisodeByCountry($country) { // Réorganise les numéro d'épisodes en fonction des dates (dateFrom)
+    $episodes = $this->findAllByCountryByDate($country);
+    if ($episodes) {
+      $i = 1;
+      foreach ($episodes as $episode) {
+        $episode->setNumber($i);
+        $this->em->persist($episode);
+        $i ++;
+      }
+      $this->em->flush(); 
+      return true;      
+    } else {
+      return false;
+    }
+  } // End of reorderNumberEpisodeByCountry($country)
+
+
 
 
 

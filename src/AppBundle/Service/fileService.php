@@ -38,4 +38,9 @@ class fileService
         return;
     } 
 
+    public function moveTempFolder($episode) // Déplace le dossier /uploads/temp/ vers le dossier du pays et le renomme avec la date de l'episode
+    {
+
+    }
+
 } //End of class

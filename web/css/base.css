@@ -113,7 +113,7 @@ nav:hover {
 
 .carousel-item {
     height: 50vh;
-    min-height: 300px;
+    min-height: 500px;
     background: no-repeat center center scroll;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -132,7 +132,7 @@ nav:hover {
 .empty-div {
     width: 100%;
     height: 50vh;
-    min-height: 300px;
+    min-height: 500px;
     z-index: -2;
 }
 

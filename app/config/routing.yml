@@ -74,6 +74,7 @@ image_upload:
     defaults:
       _controller: "AppBundle:Episode:imageUpload"
 
+## Utile pour lancer des scripts de correction en masse ##
 episode_dev:
     path: /episode_dev
     defaults:

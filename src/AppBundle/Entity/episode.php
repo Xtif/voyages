@@ -33,7 +33,7 @@ class episode
     /**
      * @var int
      *
-     * @ORM\Column(name="number", type="integer")
+     * @ORM\Column(name="number", type="integer", nullable=true, unique=true)
      */
     private $number;
 

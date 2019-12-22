@@ -18,6 +18,15 @@ class episodeRepository extends \Doctrine\ORM\EntityRepository
 	      ->getResult();
 	} // End getEpisodesByCountry()
 
+	public function getEpisodesByCountryByDate($country) {
+	    return $this->createQueryBuilder('e')
+	      ->where('e.country = :country')
+	      ->setParameter('country', $country)
+	      ->orderBy('e.dateFrom', 'ASC')
+	      ->getQuery()
+	      ->getResult();
+	} // End getEpisodesByCountryByDate()
+
 	public function findThreeLastId() {
 	    return $this->createQueryBuilder('e')
 	      ->orderBy('e.id', 'DESC')

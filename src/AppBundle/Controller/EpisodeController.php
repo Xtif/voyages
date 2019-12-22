@@ -44,6 +44,7 @@ class EpisodeController extends Controller
     $this->uploadsDirectory = $uploadsDirectory;
   }
 
+  // A SUPPRIMER - renommage des src d'image dans le text des episodes
   public function devAction(Request $request) {
     if ($this->episodeService->renamePathPicture()) {
       return $this->redirectToRoute('homepage');
@@ -70,15 +71,6 @@ class EpisodeController extends Controller
           )
         )
       )
-//      ->add('number', IntegerType::class,
-//        array(
-//          'label' => 'Numéro de l\'épisode',
-//          'attr' => array(
-//            'class' => 'form-control col-lg-10 m-auto',
-//            'placeholder' => 'N°'
-//          )
-//        )
-//      )
       ->add('dateFrom', DateType::class,
         array(
           'attr'   => array(
@@ -174,22 +166,34 @@ class EpisodeController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         // Ajout de la photo et de la video
-        $fileNamePhoto = $this->fileService->upload($episode->getMainPhoto(), $this->getParameter('uploads_directory') . '/' . $episode->getCountry()->getFolder() . '/' . $episode->getNumber() . '/', 'Main_photo_episode_' . $episode->getNumber());
+        $tempFolderPath = $this->getParameter('uploads_directory') . '/temp';
+        if (!file_exists($tempFolderPath))
+        {
+          mkdir($tempFolderPath);
+        }
+
+        $fileNamePhoto = $this->fileService->upload($episode->getMainPhoto(), $tempFolderPath, '/Main_photo');
         $episode->setMainPhoto($fileNamePhoto);
 
         if ($episode->getVideo()) {
-          $fileNameVideo = $this->fileService->upload($episode->getVideo(), $this->getParameter('uploads_directory') . '/' . $episode->getCountry()->getFolder() . '/' . $episode->getNumber() . '/', 'Video_episode_' . $episode->getNumber());
+          $fileNameVideo = $this->fileService->upload($episode->getVideo(), $tempFolderPath, 'Main_video');
           $episode->setVideo($fileNameVideo);
         }
-
-        //Gestion des images du corps de texte
-        // $episode->setText(str_replace("../", $_SERVER['HTTP_ORIGIN'] . "/voyages/web/", $episode->getText()));
         
         $em->persist($episode);
         $em->flush();
 
+        // Reorganise les numéro des episodes
+        $this->episodeService->reorderNumberEpisodeByCountry($episode->getCountry());
+
+        // Déplacement du dossier temp dans le dossier du pays et renommage
+        //$this->fileService->moveTempFolder($episode);      
+        $newDateEpisode = date_format( $episode->getDateFrom(), 'Y_m_d');
+        $newFolderPath = $this->getParameter('uploads_directory') . '/' . $episode->getCountry()->getFolder() . '/' . $newDateEpisode;
+        rename($tempFolderPath, $newFolderPath);  
+
         // On redirige vers la page suivante
-        return $this->redirectToRoute('episode_read', array('country_folder' => $episode->getCountry()->getFolder(), 'episode_id' => $episode->getId()));
+        return $this->redirectToRoute('episode_read', array('country_id' => $episode->getCountry()->getId(), 'episode_id' => $episode->getId()));
       } else { // Si les données ne sont pas valides
         return $this->render('default/episode_initialize.html.twig', array('form' => $form->createView()));
       }
